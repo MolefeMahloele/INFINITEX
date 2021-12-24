@@ -3,7 +3,9 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
-
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
 auth = Blueprint('auth', __name__)
 
@@ -50,3 +52,9 @@ def page_not_found(e):
 @auth.errorhandler(500)
 def page_not_found(e):
     return render_template('500.html'), 500
+
+
+# Checkout page
+@auth.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
